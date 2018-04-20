@@ -89,7 +89,7 @@
 (s/def ::key-value-pair (s/keys :req [:crucible.aws.ecs.task-definition.key-value-pair/name
                                       :crucible.aws.ecs.task-definition.key-value-pair/value]))
 (s/def ::environment (spec-or-ref (s/* ::key-value-pair)))
-(s/def ::command (spec-or-ref string?))
+(s/def ::command (spec-or-ref (s/* (spec-or-ref string?))))
 (s/def ::cpu (spec-or-ref integer?))
 (s/def :crucible.aws.ecs.log-configuration/log-driver (spec-or-ref string?))
 (s/def :crucible.aws.ecs.log-configuration/options map?)
