@@ -1,9 +1,8 @@
 (ns crucible.aws.route53.record-set
   "AWS::Route53::RecordSet"
   (:require [clojure.spec.alpha :as s]
-            [crucible.aws.route53 :as route53]
             [crucible.encoding.keys :refer [->key]]
-            [crucible.resources :as res :refer [defresource spec-or-ref]]))
+            [crucible.resources :as res :refer [spec-or-ref]]))
 
 ;; recordset https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
 
@@ -34,22 +33,21 @@
 (s/def ::ttl (spec-or-ref string?))
 (s/def ::type (spec-or-ref string?))
 (s/def ::weight (spec-or-ref integer?))
-(s/def ::record-set (s/keys :req [::name]
-                            :opt [::alias-target
-                                  ::comment
-                                  ::failover
-                                  ::geo-location
-                                  ::health-check-id
-                                  ::hosted-zone-id
-                                  ::hosted-zone-name
-                                  ::region
-                                  ::resource-records
-                                  ::set-identifier
-                                  ::ttl
-                                  ::type
-                                  ::weight]))
+
+(s/def ::resource-spec (s/keys :req [::name]
+                               :opt [::alias-target
+                                     ::comment
+                                     ::failover
+                                     ::geo-location
+                                     ::health-check-id
+                                     ::hosted-zone-id
+                                     ::hosted-zone-name
+                                     ::region
+                                     ::resource-records
+                                     ::set-identifier
+                                     ::ttl
+                                     ::type
+                                     ::weight]))
 
 (defmethod ->key :ttl [_] "TTL")
 (defmethod ->key :dns-name [_] "DNSName")
-
-(defresource record-set (route53/prefix "RecordSet") ::record-set)
