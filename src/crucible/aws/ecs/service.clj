@@ -43,6 +43,8 @@
                                        :opt [::assign-public-ip
                                              ::security-groups]))
 
+(defmethod ->key :aws-vpc-configuration [_] "AwsvpcConfiguration")
+
 (s/def ::network-configuration (s/keys :req []
                                        :opt [::aws-vpc-configuration]))
 
