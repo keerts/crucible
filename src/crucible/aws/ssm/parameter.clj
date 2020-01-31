@@ -1,7 +1,7 @@
 (ns crucible.aws.ssm.parameter
   "AWS::SSM::Parameter"
   (:require [clojure.spec.alpha :as s]
-            [crucible.aws.ssm :as ssm]
+            [crucible.aws.ssm :refer [ssm]]
             [crucible.encoding.keys :refer [->key]]
             [crucible.resources :refer [spec-or-ref defresource] :as res]))
 
